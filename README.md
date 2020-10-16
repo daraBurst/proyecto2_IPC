@@ -1,2 +1,2 @@
-# proyecto2_IPC
+#IPC
 Desarrollo de API Rest con Python
