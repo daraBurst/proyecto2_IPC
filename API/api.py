@@ -1,5 +1,5 @@
 import flask
-from flask import request,jsonify
+from flask import request, jsonify
 import playlist, books
 
 app = flask.Flask(__name__)
