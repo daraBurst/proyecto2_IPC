@@ -1,4 +1,4 @@
-from flask import Flask, jsonify, render_template
+from flask import Flask, jsonify, render_template, redirect, url_for
 from flask_cors import CORS, cross_origin
 from users import User
 import json
@@ -7,6 +7,10 @@ app = Flask(__name__)
 app.config["DEBUG"] = True
 CORS(app, support_credentials=True)
 Listado = []
+
+@app.route('/')
+def index():
+    return redirect(url_for('home_page'))
 
 @app.route('/v1/home')
 def home_page():
