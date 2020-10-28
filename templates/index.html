@@ -6,18 +6,17 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <script src="https://kit.fontawesome.com/64d58efce2.js" crossorigin="anonymous"></script>
   <title>Music Station. Turning your world upside down</title>
-  <link rel="apple-touch-icon" sizes="180x180" href="favicon/apple-touch-icon.png">
-  <link rel="icon" type="image/png" sizes="32x32" href="favicon/favicon-32x32.png">
-  <link rel="icon" type="image/png" sizes="16x16" href="favicon/favicon-16x16.png">
-  <link rel="manifest" href="favicon/site.webmanifest">
-  <link rel="stylesheet" href="style.css">
+  <link rel="apple-touch-icon" sizes="180x180" href="{{ url_for('static', filename='favicon/apple-touch-icon.png')}}">
+  <link rel="icon" type="image/png" sizes="32x32" href="{{ url_for('static', filename='favicon/favicon-32x32.png')}}">
+  <link rel="icon" type="image/png" sizes="16x16" href="{{ url_for('static', filename='favicon/favicon-16x16.png')}}">
+  <link rel="manifest" href="{{ url_for('static', filename='favicon/site.webmanifest')}}">
+  <link rel="stylesheet" href="{{ url_for('static', filename='styles/style.css') }}">
 </head>
 
 <body>
   <div class="container">
     <div class="forms-container">
       <div class="signin-signup">
-
         <form action="" class="sign-in-form">
           <h2 class="title">Sign in</h2>
           <div class="input-field">
@@ -31,7 +30,6 @@
           <input type="submit" value="Login" class="btn solid">
           <p class="pswrd-reset">Forgot password?</p>
         </form>
-
         <form action="" class="sign-up-form">
           <h2 class="title">Sign up</h2>
           <div class="input-field">
@@ -52,7 +50,6 @@
           </div>
           <input type="submit" value="Sign up" class="btn solid">
         </form>
-
       </div>
     </div>
     <div class="panels-container">
@@ -62,20 +59,18 @@
           <p>Amazing happens here. All the time. Start exploring.</p>
           <button class="btn transparent" id="sign-up-btn">Sign up</button>
         </div>
-        <img src="img/undraw_walk_in_the_city_1ma6.svg" class="image" alt="">
+        <img src="{{ url_for('static', filename='img/undraw_walk_in_the_city_1ma6.svg')}}" class="image" alt="">
       </div>
-
       <div class="panel right-panel">
         <div class="content">
           <h3>One of us</h3>
           <p>Music Station is the easiest way to play what you love and discover something new.</p>
           <button class="btn transparent" id="sign-in-btn">Sign in</button>
         </div>
-        <img src="img/undraw_mello_otq1.svg" class="image" alt="">
+        <img src="{{ url_for('static', filename='img/undraw_mello_otq1.svg')}}" class="image" alt="">
       </div>
     </div>
   </div>
-  <script src="app.js"></script>
+  <script src="{{ url_for('static', filename='js/app.js')}}"></script>
 </body>
-
 </html>
