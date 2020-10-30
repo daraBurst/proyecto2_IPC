@@ -60,6 +60,24 @@ def signup():
                 })
 
 
+@app.route('/v1/signin', methods=['POST', 'GET'])
+def signin():
+    global Listado
+    username = request.json['username']
+    password = request.json['password']
+    for x in range(len(Listado)):
+        if username == Listado[x].getUsername() and password == Listado[x].getPassword():
+            return jsonify({
+                'message': 'Success',
+                'reason': 'Acceso otorgado.'
+            })
+        else:
+            return jsonify({
+                'message': 'Failed',
+                'reason': 'El nombre de usuario no existe.'
+            })
+
+
 @app.route('/v1/users/all', methods=['GET'])
 def show_all_usrs():
     global Listado
@@ -82,7 +100,24 @@ def recover_pswrd():
     for usuario in Listado:
         if usuario.getUsername() == username:
             response = usuario.getPassword()
-            return jsonify(response)
+            return jsonify('The password is: ' + response)
+        else:
+            return jsonify({
+                'message': 'Failed',
+                'reason': 'El nombre de usuario no existe.'
+                })
+
+
+@app.route('/v1/delete/<string:username>', methods=['DELETE'])
+def remove_usr(username):
+    global Listado
+    for x in range(len(Listado)):
+        if username == Listado[x].getUsername():
+            Listado.pop(x)
+            return jsonify({
+                'message': 'Success',
+                'reason': 'El usuario ha sido eliminado'
+            })
         else:
             return jsonify({
                 'message': 'Failed',
