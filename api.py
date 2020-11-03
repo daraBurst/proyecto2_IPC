@@ -60,21 +60,21 @@ def signup():
                 })
 
 
-@app.route('/v1/signin', methods=['POST', 'GET'])
+@app.route('/v1/signin', methods=['POST'])
 def signin():
     global Listado
     username = request.json['username']
     password = request.json['password']
-    for x in range(len(Listado)):
-        if username == Listado[x].getUsername() and password == Listado[x].getPassword():
+    for x in Listado:
+        if x.getUsername() == username and x.getPassword() == password:
             return jsonify({
                 'message': 'Success',
-                'reason': 'Acceso otorgado.'
-            })
+                'usuario': x.getUsername()
+                })
         else:
             return jsonify({
                 'message': 'Failed',
-                'reason': 'El nombre de usuario no existe.'
+                'usuario': x.getUsername()
             })
 
 
