@@ -61,8 +61,8 @@ signin.addEventListener('submit', (e) =>{
     
     e.preventDefault();
     
-    var username = document.getElementById('username').value;
-    var password = document.getElementById('password').value;
+    var username = document.getElementById('username-s').value;
+    var password = document.getElementById('password-s').value;
 
     var objecto = {
         'username': username,
@@ -73,13 +73,13 @@ signin.addEventListener('submit', (e) =>{
 
     fetch('http://127.0.0.1:5000/v1/signin', {
         method: 'POST',
-        body: JSON.stringify(objecto),
         headers:{
             'Content-Type': 'application/json'
-        }
+        },
+        body: JSON.stringify(objecto)
     }).then(res => res.json())
     .catch(error => console.error('Error:', error))
-    .then(response => console.log('Success:', response));
+    .then(res => console.log('Success:', res));
 });
 
 /*

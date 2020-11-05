@@ -65,17 +65,20 @@ def signin():
     global Listado
     username = request.json['username']
     password = request.json['password']
-    for x in Listado:
-        if x.getUsername() == username and x.getPassword() == password:
-            return jsonify({
+    for User in Listado:
+        if User.getUsername() == username and User.getPassword() == password:
+            Dato = {
                 'message': 'Success',
-                'usuario': x.getUsername()
-                })
+                'usuario': User.getUsername()
+                }
+            break
         else:
-            return jsonify({
+            Dato = {
                 'message': 'Failed',
-                'usuario': x.getUsername()
-            })
+                'usuario': ''
+            }
+    respuesta = jsonify(Dato)
+    return(respuesta)
 
 
 @app.route('/v1/users/all', methods=['GET'])
@@ -97,8 +100,9 @@ def show_all_usrs():
 def recover_pswrd():
     global Listado
     username = request.json['username']
+    password = request.json['password']
     for usuario in Listado:
-        if usuario.getUsername() == username:
+        if usuario.getUsername() == username and usuario.getPassword() == password:
             response = usuario.getPassword()
             return jsonify('The password is: ' + response)
         else:
