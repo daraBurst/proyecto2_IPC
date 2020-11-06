@@ -96,20 +96,28 @@ def show_all_usrs():
     return(json_response)
 
 
-@app.route('/v1/recover-password', methods=['GET'])
-def recover_pswrd():
+@app.route('/v1/recover-password')
+def recover_pswrd_page():
+    return render_template('reset-pswrd.html')
+
+
+@app.route('/v1/recover-password/<string:username>', methods=['GET'])
+def recover_pswrd(username):
     global Listado
-    username = request.json['username']
-    password = request.json['password']
-    for usuario in Listado:
-        if usuario.getUsername() == username and usuario.getPassword() == password:
-            response = usuario.getPassword()
-            return jsonify('The password is: ' + response)
+    for User in Listado:
+        if User.getUsername() == username:
+            Dato = {
+                'message': 'Success',
+                'usuario': User.getPassword()
+                }
+            break
         else:
-            return jsonify({
+            Dato = {
                 'message': 'Failed',
-                'reason': 'El nombre de usuario no existe.'
-                })
+                'usuario': ''
+            }
+    respuesta = jsonify(Dato)
+    return(respuesta)
 
 
 @app.route('/v1/delete/<string:username>', methods=['DELETE'])
