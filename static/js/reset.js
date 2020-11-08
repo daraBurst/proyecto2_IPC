@@ -16,5 +16,10 @@ recover_pswrd.addEventListener('submit', (e) =>{
     fetch(endpoint)
     .then(res => res.json())
     .catch(error => console.error('Error:', error))
-    .then(response => console.log('Success:', response));
+    .then(response => {
+        if (response.status == 200){
+            alert('The password is: ' + response.message)
+        } else {
+            document.getElementById('alert-recover-pswrd').innerHTML = `${response.message}`
+        }});
 });

@@ -8,6 +8,11 @@ app.config["DEBUG"] = True
 CORS(app, support_credentials=True)
 Listado = []
 
+
+Admin = User('Admin', 'Admin', 'Admin')
+Listado.append(Admin)
+
+
 @app.route('/')
 def index():
     return redirect(url_for('home_page'))
@@ -25,6 +30,32 @@ def signup():
     name = request.json['name']
     password = request.json['password']
     confirm_pswrd = request.json['confirm_pswrd']
+    username_exists = False
+
+    for usuario in Listado:
+        if username == usuario.getUsername():
+            username_exists = True
+            break
+    if username_exists:
+        return jsonify({
+            'message': 'The username already exists',
+            'status': 400
+        })
+    else:
+        if password != confirm_pswrd:
+            return jsonify({
+                'message': 'The password does not match',
+                'status': 400
+                })
+        else:
+            new_entry = User(username, name, password)
+            Listado.append(new_entry)
+            return jsonify({
+                'message': 'The user has been created',
+                'status': 200
+                })
+
+'''
     if len(Listado) > 0:
         for usuario in Listado:
             if usuario.getUsername() == username:
@@ -37,14 +68,14 @@ def signup():
                     return jsonify({
                         'message': 'Failed',
                         'reason': 'Las contraseñas no coinciden.'
-                        })
+                    })
                 else:
                     new_entry = User(username, name, password)
                     Listado.append(new_entry)
                     return jsonify({
                         'message': 'Success',
                         'reason': 'Se ha creado un nuevo usuario.'
-                        })
+                    })
     else:
         if password != confirm_pswrd:
             return jsonify({
@@ -58,7 +89,7 @@ def signup():
                 'message': 'Success',
                 'reason': 'Se ha creado un nuevo usuario.'
                 })
-
+'''
 
 @app.route('/v1/signin', methods=['POST'])
 def signin():
@@ -69,16 +100,22 @@ def signin():
         if User.getUsername() == username and User.getPassword() == password:
             Dato = {
                 'message': 'Success',
-                'usuario': User.getUsername()
-                }
-            break
+                'username': User.getUsername(),
+                'status': 200
+            }
         else:
             Dato = {
-                'message': 'Failed',
-                'usuario': ''
+                'message': 'The credentials are not valid',
+                'username': '',
+                'status': 400
             }
     respuesta = jsonify(Dato)
     return(respuesta)
+
+
+@app.route('/v1/dashboard')
+def dashboard():
+    return render_template('dashboard.html')
 
 
 @app.route('/v1/users/all', methods=['GET'])
@@ -87,8 +124,8 @@ def show_all_usrs():
     List = []
     for usuario in Listado:
         usuarios = {
-            'usuario': usuario.getUsername(),
-            'nombre': usuario.getName(),
+            'username': usuario.getUsername(),
+            'name': usuario.getName(),
             'password': usuario.getPassword()
         }
         List.append(usuarios)
@@ -107,14 +144,14 @@ def recover_pswrd(username):
     for User in Listado:
         if User.getUsername() == username:
             Dato = {
-                'message': 'Success',
-                'usuario': User.getPassword()
-                }
+                'message': User.getPassword(),
+                'status': 200
+            }
             break
         else:
             Dato = {
-                'message': 'Failed',
-                'usuario': ''
+                'message': 'The username does not exist',
+                'status': 400
             }
     respuesta = jsonify(Dato)
     return(respuesta)
@@ -134,9 +171,7 @@ def remove_usr(username):
             return jsonify({
                 'message': 'Failed',
                 'reason': 'El nombre de usuario no existe.'
-                })
-            
-
+            })
 
 
 app.run()

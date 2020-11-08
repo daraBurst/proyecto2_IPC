@@ -45,7 +45,12 @@ register.addEventListener('submit', (e) =>{
         }
     }).then(res => res.json())
     .catch(error => console.error('Error:', error))
-    .then(response => console.log('Success:', response));
+    .then(response => {
+        if (response.status == 200){
+            console.log('message:', response)
+        } else {
+            document.getElementById('alert-singup').innerHTML = `${response.message}`
+        }});
 });
 
 signin.addEventListener('submit', (e) =>{
@@ -70,5 +75,11 @@ signin.addEventListener('submit', (e) =>{
         body: JSON.stringify(objecto)
     }).then(res => res.json())
     .catch(error => console.error('Error:', error))
-    .then(res => console.log('Success:', res));
+    .then(response => {
+        if (response.status == 200){
+            window.location.href = '/v1/dashboard'
+            console.log('message:', response)
+        } else {
+            document.getElementById('alert').innerHTML = `${response.message}`
+        }});
 });

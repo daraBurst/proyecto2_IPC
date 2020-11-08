@@ -210,6 +210,11 @@ form.sign-in-form{
     transform: translateX(800px);
 }
 
+p.alerts{
+  color: red;
+  font-size: 0.65rem;
+}
+
 /* ANIMATION */
 
 .container.sign-up-mode:before {
