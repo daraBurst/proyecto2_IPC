@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://kit.fontawesome.com/64d58efce2.js" crossorigin="anonymous"></script>
+    <title>Music Station. Turning your world upside down</title>
+    <link rel="apple-touch-icon" sizes="180x180" href="{{ url_for('static', filename='favicon/apple-touch-icon.png')}}">
+    <link rel="icon" type="image/png" sizes="32x32" href="{{ url_for('static', filename='favicon/favicon-32x32.png')}}">
+    <link rel="icon" type="image/png" sizes="16x16" href="{{ url_for('static', filename='favicon/favicon-16x16.png')}}">
+    <link rel="manifest" href="{{ url_for('static', filename='favicon/site.webmanifest')}}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles/aboutstyle.css') }}">
+    <audio autoplay="true" loop="true" src="{{ url_for('static', filename='audio/audio.ogg')}}"
+        type="audio/ogg"></audio>
+</head>
+
+<body>
+    <div class="split left">
+        <div><i id="return_sign_in_btn" class="fas fa-arrow-left"></i>
+        </div>
+        <h3 class="title">About Us</h3>
+        <div class="centered">
+            <p>Music Station is the leading audio entertainment company in the world, and the premier programmer
+                and platform for subscription and digital advertising-supported products.</p>
+        </div>
+    </div>
+
+    <div class="split right">
+        <div class="centered-c">
+            <div style="display: inline-block;">
+                <i style="color: #ffffff;" class="fas fa-phone"></i>
+                <h3>Contact Us</h3>
+            </div>
+            <h5>1-866-635-5027</h5>
+            <p>Monday – Friday: 8am – 11pm EST</p>
+            <p>Saturday – Sunday: 8am – 8pm EST.</p>
+        </div>
+    </div>
+
+    <script>
+        const return_sign_in_btn = document.getElementById('return_sign_in_btn');
+        return_sign_in_btn.addEventListener('click', () => {
+            window.location = "home";
+            console.log('Back to home');
+        });
+    </script>
+</body>
+
+</html>

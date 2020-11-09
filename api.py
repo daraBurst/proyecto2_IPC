@@ -9,7 +9,7 @@ CORS(app, support_credentials=True)
 Listado = []
 
 
-Admin = User('Admin', 'Admin', 'Admin')
+Admin = User('Admin', 'Usuario Maestro', 'Admin')
 Listado.append(Admin)
 
 
@@ -173,5 +173,9 @@ def remove_usr(username):
                 'reason': 'El nombre de usuario no existe.'
             })
 
+
+@app.route('/v1/general')
+def general():
+    return render_template('contact-about.html')
 
 app.run()

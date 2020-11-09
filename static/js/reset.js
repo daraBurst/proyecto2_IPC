@@ -1,5 +1,6 @@
 const recover_pswrd = document.getElementById('recover-pswrd-form');
 const return_sign_in_btn = document.getElementById('return_sign_in_btn');
+let inputs = document.querySelectorAll("input.hide");
 
 return_sign_in_btn.addEventListener('click',() => {
     window.location="home";
@@ -18,7 +19,11 @@ recover_pswrd.addEventListener('submit', (e) =>{
     .catch(error => console.error('Error:', error))
     .then(response => {
         if (response.status == 200){
-            alert('The password is: ' + response.message)
+            alert('The password is: ' + response.message);
+
+            inputs.forEach(input => input.value = '');
+            document.getElementById('alert-recover-pswrd').innerHTML = "";
+            
         } else {
             document.getElementById('alert-recover-pswrd').innerHTML = `${response.message}`
         }});

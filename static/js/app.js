@@ -1,22 +1,30 @@
 const sign_in_btn = document.querySelector("#sign-in-btn");
 const sign_up_btn = document.querySelector("#sign-up-btn");
 const container = document.querySelector(".container");
+let inputs = document.querySelectorAll("input.hide");
 
 sign_up_btn.addEventListener('click',() => {
     container.classList.add("sign-up-mode");
+    inputs.forEach(input => input.value = '');
 });
 
 sign_in_btn.addEventListener('click',() => {
     container.classList.remove("sign-up-mode");
+    inputs.forEach(input => input.value = '');
 });
 
 const register = document.getElementById('sign-up-form');
 const signin = document.getElementById('sign-in-form');
 const forgot_pswrd_btn = document.getElementById('forgot_pswrd');
+const about_btn = document.getElementById('about');
 
 forgot_pswrd_btn.addEventListener('click',() => {
     window.location="recover-password";
     console.log('Forgot pswrd');
+});
+
+about_btn.addEventListener('click',() => {
+    window.location="general";
 });
 
 register.addEventListener('submit', (e) =>{
@@ -47,7 +55,9 @@ register.addEventListener('submit', (e) =>{
     .catch(error => console.error('Error:', error))
     .then(response => {
         if (response.status == 200){
-            console.log('message:', response)
+            inputs.forEach(input => input.value = '');
+            document.getElementById('alert-singup').innerHTML = "";
+            alert(response.message)
         } else {
             document.getElementById('alert-singup').innerHTML = `${response.message}`
         }});

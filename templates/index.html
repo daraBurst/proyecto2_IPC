@@ -11,6 +11,7 @@
   <link rel="icon" type="image/png" sizes="16x16" href="{{ url_for('static', filename='favicon/favicon-16x16.png')}}">
   <link rel="manifest" href="{{ url_for('static', filename='favicon/site.webmanifest')}}">
   <link rel="stylesheet" href="{{ url_for('static', filename='styles/style.css') }}">
+  <audio autoplay="true" loop="true" src="{{ url_for('static', filename='audio/audio.ogg')}}" type="audio/ogg"></audio>
 </head>
 
 <body>
@@ -21,33 +22,34 @@
           <h2 class="title">Sign in</h2>
           <div class="input-field">
             <i class="fas fa-at"></i>
-            <input type="text" placeholder="Username" id="username-s">
+            <input class="hide" type="text" placeholder="Username" id="username-s" required>
           </div>
           <div class="input-field">
             <i class="fas fa-lock"></i>
-            <input type="password" placeholder="Password" id="password-s">
+            <input class="hide" type="password" placeholder="Password" id="password-s" required>
           </div>
           <input type="submit" value="Login" class="btn solid">
           <p class="pswrd-reset" id="forgot_pswrd">Forgot password?</p>
+          <h6 class="pswrd-reset" id="about">About Us - Contact Us</h6>
           <p id="alert" class="alerts"></p>
         </form>
         <form action="" class="sign-up-form" id="sign-up-form">
           <h2 class="title">Sign up</h2>
           <div class="input-field">
             <i class="fas fa-at"></i>
-            <input type="text" placeholder="Username" id="username-in-form">
+            <input class="hide" pattern="[A-Za-z0-9]{1,15}" type="text" placeholder="Username" id="username-in-form" required>
           </div>
           <div class="input-field">
             <i class="fas fa-user"></i>
-            <input type="text" placeholder="Name" id="name-in-form">
+            <input class="hide" type="text" placeholder="Name" id="name-in-form" required>
           </div>
           <div class="input-field">
             <i class="fas fa-lock"></i>
-            <input type="password" placeholder="Password" id="password-in-form">
+            <input class="hide" type="password" placeholder="Password" id="password-in-form" required>
           </div>
           <div class="input-field">
             <i class="fas fa-lock"></i>
-            <input type="password" placeholder="Confirm Password" id="confirm_pswrd-in-form">
+            <input class="hide" type="password" placeholder="Confirm Password" id="confirm_pswrd-in-form" required>
           </div>
           <input type="submit" value="Sign up" class="btn solid">
           <p id="alert-singup" class="alerts"></p>
@@ -75,4 +77,5 @@
   </div>
   <script src="{{ url_for('static', filename='js/app.js')}}"></script>
 </body>
+
 </html>
