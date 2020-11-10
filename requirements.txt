@@ -7,7 +7,7 @@ distlib==0.3.1
 filelock==3.0.12
 Flask==1.1.2
 Flask-Cors==3.0.9
-gunicorn @ git+https://github.com/benoitc/gunicorn.git@548d5828da6b93fa6a14217742c6e6d2c7b2b900
+gunicorn==20.0.4
 isort==5.6.4
 itsdangerous==1.1.0
 Jinja2==2.11.2
