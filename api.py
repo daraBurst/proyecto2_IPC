@@ -92,20 +92,21 @@ def signup():
 '''
 
 @app.route('/v1/signin', methods=['POST'])
-def signin():
+def Login():
     global Listado
     username = request.json['username']
     password = request.json['password']
-    for User in Listado:
-        if User.getUsername() == username and User.getPassword() == password:
+    for usuario in Listado:
+        if usuario.getUsername() == username and usuario.getPassword() == password:
             Dato = {
                 'message': 'Success',
-                'username': User.getUsername(),
+                'username': usuario.getUsername(),
                 'status': 200
-            }
+                }
+            break
         else:
             Dato = {
-                'message': 'The credentials are not valid',
+                'message': 'The credencials are not valid',
                 'username': '',
                 'status': 400
             }
@@ -113,9 +114,30 @@ def signin():
     return(respuesta)
 
 
-@app.route('/v1/dashboard')
+@app.route('/v1/dashboard/')
 def dashboard():
     return render_template('dashboard.html')
+
+
+@app.route('/v1/dashboard/user/')
+def dashboard_user():
+    return render_template('user.html')
+
+
+@app.route('/v1/users/<string:username>', methods=['GET'])
+def show_user(username):
+    global Listado
+    List = []
+    for User in Listado:
+        if User.getUsername() == username: 
+            usuarios = {
+                'username': User.getUsername(),
+                'name': User.getName(),
+                'password': User.getPassword()
+                }
+        List.append(usuarios)
+    json_response = jsonify(List)
+    return(json_response)
 
 
 @app.route('/v1/users/all', methods=['GET'])
@@ -160,18 +182,21 @@ def recover_pswrd(username):
 @app.route('/v1/delete/<string:username>', methods=['DELETE'])
 def remove_usr(username):
     global Listado
-    for x in range(len(Listado)):
-        if username == Listado[x].getUsername():
-            Listado.pop(x)
-            return jsonify({
-                'message': 'Success',
-                'reason': 'El usuario ha sido eliminado'
-            })
+    for i in range(len(Listado)):
+        if username == Listado[i].getUsername():
+            del Listado[i]
+            Dato = {
+                'message': 'The user has been deleted',
+                'status': 200
+            }
+            break
         else:
-            return jsonify({
-                'message': 'Failed',
-                'reason': 'El nombre de usuario no existe.'
-            })
+            Dato = {
+                'message': 'The username does not exist',
+                'status': 400
+            }
+    respuesta = jsonify(Dato)
+    return(respuesta)     
 
 
 @app.route('/v1/general')

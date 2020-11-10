@@ -76,3 +76,7 @@ i{
 i:hover{
     color: black;
 }
+
+.table .table-striped{
+  width: 75%;
+}
