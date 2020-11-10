@@ -203,4 +203,4 @@ def remove_usr(username):
 def general():
     return render_template('contact-about.html')
 
-app.run()
+app.run(threaded=True, host="0.0.0.0", port=5000)
