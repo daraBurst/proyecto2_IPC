@@ -5,6 +5,7 @@ import json
 
 app = Flask(__name__)
 app.config["DEBUG"] = True
+ENV = ""
 CORS(app, support_credentials=True)
 Listado = []
 
